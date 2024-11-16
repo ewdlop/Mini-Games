@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>逻辑门模拟器 (纯CSS实现)</title>
+    <style>
+        .gate {
+            margin: 20px;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .input {
+            margin: 5px;
+        }
+
+        .output {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* AND 门逻辑修正 */
+        .gate:has(#and-a:checked):has(#and-b:checked) .and-output::after {
+            content: "1";
+        }
+        .gate:has(#and-a:not(:checked)) .and-output::after,
+        .gate:has(#and-b:not(:checked)) .and-output::after {
+            content: "0";
+        }
+
+        /* OR 门逻辑修正 */
+        .gate:has(#or-a:checked) .or-output::after,
+        .gate:has(#or-b:checked) .or-output::after {
+            content: "1";
+        }
+        .gate:has(#or-a:not(:checked)):has(#or-b:not(:checked)) .or-output::after {
+            content: "0";
+        }
+
+        /* NOT 门逻辑修正 */
+        .gate:has(#not-a:checked) .not-output::after {
+            content: "0";
+        }
+        .gate:has(#not-a:not(:checked)) .not-output::after {
+            content: "1";
+        }
+
+        /* 基础输出样式 */
+        .output span::after {
+            display: inline;
+            content: "0";
+        }
+
+        .output span {
+            display: inline;
+        }
+
+        /* 复选框样式 */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        /* 标签样式 */
+        label {
+            cursor: pointer;
+            padding: 2px 5px;
+            border: 1px solid #333;
+            margin: 0 5px;
+        }
+
+        /* 选中状态的标签样式 */
+        input[type="checkbox"]:checked + label {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>逻辑门模拟器 (纯CSS实现)</h1>
+    
+    <div class="gate">
+        <h2>AND 门</h2>
+        <div class="input">
+            输入 A: <input type="checkbox" id="and-a"><label for="and-a">[ ]</label>
+            输入 B: <input type="checkbox" id="and-b"><label for="and-b">[ ]</label>
+        </div>
+        <div class="output">
+            输出: <span class="and-output"></span>
+        </div>
+    </div>
+
+    <div class="gate">
+        <h2>OR 门</h2>
+        <div class="input">
+            输入 A: <input type="checkbox" id="or-a"><label for="or-a">[ ]</label>
+            输入 B: <input type="checkbox" id="or-b"><label for="or-b">[ ]</label>
+        </div>
+        <div class="output">
+            输出: <span class="or-output"></span>
+        </div>
+    </div>
+
+    <div class="gate">
+        <h2>NOT 门</h2>
+        <div class="input">
+            输入: <input type="checkbox" id="not-a"><label for="not-a">[ ]</label>
+        </div>
+        <div class="output">
+            输出: <span class="not-output"></span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通用逻辑门示例</title>
+    <style>
+        .logic-gate {
+            position: relative;
+            width: 100px;
+            height: 60px;
+            margin: 50px auto;
+        }
+
+        .gate-body {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #333;
+            border-radius: 10px;
+            left: 20px;
+        }
+
+        .input-1, .input-2 {
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #333;
+            left: 0;
+        }
+
+        .input-1 {
+            top: 20px;
+        }
+
+        .input-2 {
+            top: 40px;
+        }
+
+        .output {
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #333;
+            right: 0;
+            top: 30px;
+        }
+
+        .nand-circle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            right: -7px;
+            top: 26px;
+            background: white;
+        }
+
+        .gate-label {
+            text-align: center;
+            margin-top: 70px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="logic-gate">
+        <div class="gate-body"></div>
+        <div class="input-1"></div>
+        <div class="input-2"></div>
+        <div class="output"></div>
+        <div class="nand-circle"></div>
+        <div class="gate-label">NAND 门</div>
+    </div>
+</body>
+</html>
