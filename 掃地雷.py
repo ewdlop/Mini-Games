@@ -1,0 +1,127 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+class MineSweeper:
+    def __init__(self, master):
+        self.master = master
+        self.master.title('掃雷遊戲')
+        self.rows = 9
+        self.cols = 9
+        self.mines = 10
+        self.buttons = []
+        self.mines_positions = []
+        self.game_over = False
+        
+        # 創建遊戲區域
+        self.create_board()
+        # 放置地雷
+        self.place_mines()
+        
+        # 添加重新開始按鈕
+        self.restart_button = tk.Button(self.master, text="重新開始", command=self.restart_game)
+        self.restart_button.grid(row=self.rows, columnspan=self.cols, pady=10)
+    
+    def create_board(self):
+        # 創建按鈕網格
+        for i in range(self.rows):
+            row = []
+            for j in range(self.cols):
+                button = tk.Button(self.master, width=2, height=1)
+                button.grid(row=i, column=j)
+                button.bind('<Button-1>', lambda e, row=i, col=j: self.click(row, col))
+                button.bind('<Button-3>', lambda e, row=i, col=j: self.flag(row, col))
+                row.append(button)
+            self.buttons.append(row)
+    
+    def place_mines(self):
+        # 隨機放置地雷
+        mine_positions = []
+        while len(mine_positions) < self.mines:
+            pos = (random.randint(0, self.rows-1), random.randint(0, self.cols-1))
+            if pos not in mine_positions:
+                mine_positions.append(pos)
+        self.mines_positions = mine_positions
+    
+    def count_adjacent_mines(self, row, col):
+        # 計算周圍地雷數量
+        count = 0
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                r, c = row + i, col + j
+                if (r, c) in self.mines_positions:
+                    count += 1
+        return count
+    
+    def click(self, row, col):
+        if self.game_over:
+            return
+            
+        button = self.buttons[row][col]
+        
+        # 檢查是否點到地雷
+        if (row, col) in self.mines_positions:
+            button.config(text="💣", bg='red')
+            self.game_over = True
+            self.reveal_all_mines()
+            # 修改遊戲結束對話框，添加重新開始選項
+            if messagebox.askyesno("遊戲結束", "踩到地雷了！\n要重新開始嗎？"):
+                self.restart_game()
+        else:
+            # 顯示周圍地雷數量
+            mines = self.count_adjacent_mines(row, col)
+            button.config(text=str(mines), state='disabled')
+            if mines == 0:
+                self.reveal_empty_cells(row, col)
+    
+    def flag(self, row, col):
+        if self.game_over:
+            return
+            
+        button = self.buttons[row][col]
+        if button['text'] == '':
+            button.config(text='🚩')
+        elif button['text'] == '🚩':
+            button.config(text='')
+    
+    def reveal_empty_cells(self, row, col):
+        # 遞迴顯示空白格子
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                r, c = row + i, col + j
+                if (0 <= r < self.rows and 
+                    0 <= c < self.cols and 
+                    self.buttons[r][c]['state'] != 'disabled'):
+                    mines = self.count_adjacent_mines(r, c)
+                    self.buttons[r][c].config(text=str(mines), state='disabled')
+                    if mines == 0:
+                        self.reveal_empty_cells(r, c)
+    
+    def reveal_all_mines(self):
+        # 遊戲結束時顯示所有地雷
+        for row, col in self.mines_positions:
+            self.buttons[row][col].config(text="💣", bg='red')
+    
+    def restart_game(self):
+        # 重置所有按鈕
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.buttons[i][j].config(
+                    text="",
+                    state="normal",
+                    bg='SystemButtonFace'  # 恢復默認背景色
+                )
+        
+        # 重置遊戲狀態
+        self.game_over = False
+        
+        # 重新放置地雷
+        self.place_mines()
+
+def main():
+    root = tk.Tk()
+    game = MineSweeper(root)
+    root.mainloop()
+
+if __name__ == '__main__':
+    main()
