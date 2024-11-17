@@ -1,0 +1,4 @@
+pygame
+vulkan
+numpy
+pyopengl
