@@ -1,0 +1,94 @@
+name: Build Python Executable
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    name: Build on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Compile Python script to executable
+        run: pyinstaller --onefile your_script.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-executable
+          path: dist/your_script.exe
+
+  build-macos:
+    name: Build on macOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Compile Python script to executable
+        run: pyinstaller --onefile your_script.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-executable
+          path: dist/your_script
+
+  build-linux:
+    name: Build on Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Compile Python script to executable
+        run: pyinstaller --onefile your_script.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-executable
+          path: dist/your_script
