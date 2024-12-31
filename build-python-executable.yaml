@@ -1,0 +1,57 @@
+name: Build and Release Python Scripts
+on:
+ push:
+   branches: [main]
+ pull_request: 
+   branches: [main]
+
+jobs:
+ build:
+   strategy:
+     matrix:
+       os: [windows-latest, macos-latest, ubuntu-latest]
+   runs-on: ${{ matrix.os }}
+   
+   steps:
+     - uses: actions/checkout@v3
+     
+     - uses: actions/setup-python@v4
+       with:
+         python-version: "3.x"
+         
+     - run: |
+         pip install -r requirements.txt
+         pip install pyinstaller
+         
+     - name: Build executables
+       run: |
+         for file in *.py
+         do
+           pyinstaller --onefile "$file"
+         done
+       shell: bash
+     
+     - uses: actions/upload-artifact@v3
+       with:
+         name: ${{ matrix.os }}-executables
+         path: dist/*
+
+ release:
+   needs: build
+   runs-on: ubuntu-latest
+   if: github.event_name == 'push'
+   
+   steps:
+     - uses: actions/download-artifact@v3
+     
+     - name: Create Release
+       uses: softprops/action-gh-release@v1
+       with:
+         files: |
+           **/*
+         tag_name: v${{ github.run_number }}
+         draft: false
+         prerelease: false
+         generate_release_notes: true
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
