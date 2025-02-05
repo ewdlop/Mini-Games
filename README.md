@@ -1,5 +1,6 @@
 # Mini-Games
 
+[![Pylint](https://github.com/ewdlop/Mini-Games/actions/workflows/pylint.yml/badge.svg)](https://github.com/ewdlop/Mini-Games/actions/workflows/pylint.yml)
 [![CodeQL](https://github.com/ewdlop/Mini-Games/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ewdlop/Mini-Games/actions/workflows/github-code-scanning/codeql)
 
 ## Description
