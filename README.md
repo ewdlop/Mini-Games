@@ -1,5 +1,7 @@
 # Mini-Games
 
+[![CodeQL](https://github.com/ewdlop/Mini-Games/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ewdlop/Mini-Games/actions/workflows/github-code-scanning/codeql)
+
 ## Description
 This repository contains a collection of mini-games implemented in various programming languages. The purpose of this repository is to provide examples of simple game implementations and to serve as a learning resource for those interested in game development.
 
