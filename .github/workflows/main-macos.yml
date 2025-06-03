@@ -19,10 +19,9 @@ env:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     strategy:
       matrix:
-        os: macos-latest
         python-version: [3.10]
     steps:
       - name: Checkout code
