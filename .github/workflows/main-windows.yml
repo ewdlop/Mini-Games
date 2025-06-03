@@ -9,45 +9,35 @@ permissions:
   contents: read
 
 env:
-  GAMES:
-    pacman.py
-    ping_pong.py
-    貪食蛇.py
-    六子棋.py
-    そうこばん.py
-    計算機.py
+  GAMES: "pacman.py ping_pong.py 貪食蛇.py 六子棋.py そうこばん.py 計算機.py"
 
 jobs:
   build:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: ["3.10"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
+        uses: actions/setup-python@v5        with:
+          python-version: ${{ matrix.python-version }}      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pyinstaller
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - name: Build games with PyInstaller
+          if (Test-Path requirements.txt) { pip install -r requirements.txt }      - name: Build games with PyInstaller
         run: |
-          for GAME in $GAMES; do
-            pyinstaller --onefile "$GAME"
-          done
+          $games = $env:GAMES -split ' '
+          foreach ($game in $games) {
+            pyinstaller --onefile $game
+          }
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: games-${{ matrix.os }}
+          name: games-windows
           path: dist/
 
   release:
