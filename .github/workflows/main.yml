@@ -3,7 +3,7 @@ name: Build and Release Python Games
 on:
   push:
     tags:
-      - 'v*.*.*'  # Trigger on version tag pushes
+      - 'v*.*.*.*'  # Trigger on version tag pushes
 
 permissions:
   contents: read
