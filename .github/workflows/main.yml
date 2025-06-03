@@ -41,7 +41,7 @@ jobs:
 
       - name: Build games with PyInstaller
         run: |
-          for GAME in pacman.py import_vulkan.py ping_pong.py 貪食蛇.py 六子棋.py そうこばん.py 計算機.py; do
+          for GAME in $GAMES; do
             pyinstaller --onefile "$GAME"
           done
 
