@@ -11,10 +11,6 @@ using 位元組陣列 = System.Byte[];
 using 位元組串流 = System.IO.MemoryStream;
 using 位元組讀取器 = System.IO.BinaryReader;
 using 位元組寫入器 = System.IO.BinaryWriter;
-using 位元組讀取器 = System.IO.BinaryReader;
-using 位元組寫入器 = System.IO.BinaryWriter;
-using 列表 = System.Collections.Generic.List;
-using 字典 = System.Collections.Generic.Dictionary;
 using 任務 = System.Threading.Tasks.Task;
 using 異常 = System.Exception;
 using 文件流 = System.IO.FileStream;
@@ -36,11 +32,17 @@ using 網路回應標頭 = System.Net.Http.Headers.HttpResponseHeaders;
 using 網路請求內容 = System.Net.Http.HttpRequestMessage;
 using 網路回應內容 = System.Net.Http.HttpResponseMessage;
 using 網路請求內容標頭 = System.Net.Http.Headers.HttpRequestHeaders;
+
+#if false
+
 using 網路請求內容標頭值 = System.Net.Http.Headers.HttpRequestHeaderValue;
 using 網路回應內容標頭值 = System.Net.Http.Headers.HttpResponseHeaderValue;
 using 網路請求內容標頭名稱 = System.Net.Http.Headers.HttpRequestHeaderName;
 using 網路回應內容標頭名稱 = System.Net.Http.Headers.HttpResponseHeaderName;
 
+#endif
+
+#if false
 using 堆疊 = System.Collections.Generic.Stack;
 using 佇列 = System.Collections.Generic.Queue;
 using 集合 = System.Collections.Generic.HashSet;
@@ -48,6 +50,7 @@ using 排序字典 = System.Collections.Generic.SortedDictionary;
 using 排序集合 = System.Collections.Generic.SortedSet;
 using 鏈表 = System.Collections.Generic.LinkedList;
 using 優先佇列 = System.Collections.Generic.PriorityQueue;
+#endif
 
 using 線程 = System.Threading.Thread;
 using 互斥鎖 = System.Threading.Mutex;
@@ -73,11 +76,9 @@ using 值元組 = System.ValueTuple;
 using 列舉 = System.Enum;
 using 事件處理器 = System.EventHandler;
 using 委託 = System.Delegate;
-using 函數 = System.Func;
 using 動作 = System.Action;
 using 可比較 = System.IComparable;
 using 可列舉 = System.Collections.IEnumerable;
-using 泛型可列舉 = System.Collections.Generic.IEnumerable;
 using 可處置 = System.IDisposable;
 using 鎖定 = System.Threading.Monitor;
 using 並行集合 = System.Collections.Concurrent;
@@ -85,7 +86,6 @@ using 任務工廠 = System.Threading.Tasks.TaskFactory;
 using 並行度 = System.Threading.Tasks.ParallelOptions;
 using 線程池 = System.Threading.ThreadPool;
 using 非同步操作 = System.Threading.Tasks.Task;
-using 非同步操作泛型 = System.Threading.Tasks.Task<>;
 using 取消令牌 = System.Threading.CancellationToken;
 using 取消令牌源 = System.Threading.CancellationTokenSource;
 using 反射 = System.Reflection;
@@ -93,11 +93,8 @@ using 類型 = System.Type;
 using 屬性 = System.Reflection.PropertyInfo;
 using 方法 = System.Reflection.MethodInfo;
 using 特性 = System.Attribute;
-using 序列化 = System.Serialization;
 using 壓縮 = System.IO.Compression;
 using 加密 = System.Security.Cryptography;
 using 編碼 = System.Text.Encoding;
 using 配置 = System.Configuration;
-using 命令行參數 = System.CommandLine;
 using 日誌 = System.Diagnostics.Debug;
-
